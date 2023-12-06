@@ -11,11 +11,19 @@ def parse_input(input_file_content: List[str]) -> (List[int], List[int]):
 
 
 def get_number_of_winning_times(time: int, distance: int) -> int:
+    '''
+    With d = distance, t = time and x the time you hold down the button you win each race by solving the following
+    equation:
+    d < x * (t - x)
+    this results in: 0.5(t - sqrt(t^2 - 4d)) < x < 0.5(t + sqrt(t^2 - 4d))
+
+    So holding the button for any x ms that satisfies the above equation is a valid strategy to win the race.
+    '''
     lower_bound = 0.5 * (time - sqrt((time * time) - 4 * distance))
-    if ceil(lower_bound) == int(lower_bound):
+    if ceil(lower_bound) == int(lower_bound):  # if the lower bound is an integer, that one must not be counted
         lower_bound += 1
     upper_bound = 0.5 * (time + sqrt((time * time) - 4 * distance))
-    if ceil(upper_bound) == int(upper_bound):
+    if ceil(upper_bound) == int(upper_bound):  # if the upper bound is an integer, that one must not be counted
         upper_bound -= 1
     return int(upper_bound) - ceil(lower_bound) + 1
 
