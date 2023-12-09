@@ -1,3 +1,5 @@
+import pathlib
+
 from advent_of_code_template.definitions import TASKS_DIR
 import os
 from markdown import markdown
@@ -5,6 +7,8 @@ import webbrowser
 import importlib.util
 from typing import List
 import argparse
+import aocd
+from definitions import CURRENT_YEAR
 
 
 def parse_args(arguments: List[str]):
@@ -36,10 +40,31 @@ def highest_task_implemented() -> int:
     return i - 1
 
 
+def download_input_data(task_number: int) -> List[str]:
+    if aocd.cookies.get_working_tokens():
+        aocd.cookies.scrape_session_tokens()
+    else:
+        if not os.environ.get('AOC_SESSION'):
+            os.environ['AOC_SESSION'] = input('Please provide session ID in order to download the AOC data:')
+            cookie_file = pathlib.Path('~/.config/aocd/token').expanduser()
+            print('Saving cookie to: ', cookie_file)
+            with open(cookie_file, 'w') as f:
+                f.write(os.environ['AOC_SESSION'])
+        else:
+            print('Downloading input-data using session ID: ', os.environ['AOC_SESSION'])
+    return aocd.get_data(day=task_number, year=CURRENT_YEAR).split('\n')
+
+
 def get_input_data(task_number: int) -> List[str]:
     file_name = os.path.join(TASKS_DIR, 'task%02d/input.txt' % task_number)
     if not input_file_exists(task_number):
-        raise Exception('file %s not found.' % file_name)
+        task_input = download_input_data(task_number)
+        print('Successfully retrieved puzzle input. Saving input to: ', file_name)
+        with open(file_name, 'w') as f:
+            for line in task_input:
+                f.write(line)
+                f.write('\n')
+        return task_input
     else:
         with open(file_name, 'r') as f:
             return f.readlines()
