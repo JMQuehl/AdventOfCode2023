@@ -163,4 +163,4 @@ cython_debug/
 .idea/
 
 # AOC input files (copyright lies with AOC)
-*/input.txt
+**/input.txt
