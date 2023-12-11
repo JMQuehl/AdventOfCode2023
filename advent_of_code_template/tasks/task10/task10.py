@@ -130,7 +130,7 @@ class Task10(AdventOfCodeProblem):
     def __init__(self, args):
         super().__init__(args)
         self.answer_text = "The point farthest from the starting position in the loop starting with S is %d steps away."
-        self.bonus_answer_text = "%d"
+        self.bonus_answer_text = "There are %d spaces inside the loop."
         self.task_number = 10
 
     def solve_task(self, input_file_content: List[str]) -> int:
