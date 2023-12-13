@@ -6,6 +6,20 @@ from advent_of_code_2023.advent_of_code_utils import parse_args
 
 class Task13Tests(TaskTest, unittest.TestCase):
     task = Task13(parse_args([]))
-    known_input = [""]
-    known_output = -1
-    known_bonus_output = -1
+    known_input = ["#.##..##.\n",
+                   "..#.##.#.\n",
+                   "##......#\n",
+                   "##......#\n",
+                   "..#.##.#.\n",
+                   "..##..##.\n",
+                   "#.#.##.#.\n",
+                   "\n",
+                   "#...##..#\n",
+                   "#....#..#\n",
+                   "..##..###\n",
+                   "#####.##.\n",
+                   "#####.##.\n",
+                   "..##..###\n",
+                   "#....#..#"]
+    known_output = 405
+    known_bonus_output = 400
