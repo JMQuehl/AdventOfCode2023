@@ -48,7 +48,7 @@ class Task13(AdventOfCodeProblem):
     def __init__(self, args):
         super().__init__(args)
         self.answer_text = 'After summarizing all notes, you get: %d.'
-        self.bonus_answer_text = '%d.'
+        self.bonus_answer_text = 'If considering smudges, the summarizing will result in: %d.'
         self.task_number = 13
 
     def solve_task(self, input_file_content: List[str]):
