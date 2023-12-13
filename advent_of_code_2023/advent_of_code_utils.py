@@ -124,6 +124,8 @@ def create_task_structure(task_number: int, args):
             template = f.read()
             f.close()
         template = re.sub('XX', '%02d' % task_number, template)
+        template = re.sub('\(task_number\)', '%d' % task_number, template)
+
         with open(os.path.join(folder, 'task%02d.py' % task_number), 'w') as f:
             f.write(template)
 

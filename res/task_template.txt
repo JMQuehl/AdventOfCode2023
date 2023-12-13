@@ -8,7 +8,7 @@ class TaskXX(AdventOfCodeProblem):
         super().__init__(args)
         self.answer_text = '%d.'
         self.bonus_answer_text = '%d.'
-        self.task_number = XX
+        self.task_number = (task_number)
 
     def solve_task(self, input_file_content: List[str]):
         return -1
