@@ -5,12 +5,14 @@ from typing import List
 
 
 def create_single_task(task_number: int, args) -> AdventOfCodeProblem:
-    if utils.task_exists(task_number):
-        module_name = 'tasks.task%02d.task%02d' % (task_number, task_number)
-        __import__(module_name)
-        task = sys.modules[module_name]
-        task_class = getattr(task, 'Task%02d' % task_number)
-        return task_class(args)
+    if not utils.task_exists(task_number):
+        utils.create_task_structure(task_number, args)
+
+    module_name = 'tasks.task%02d.task%02d' % (task_number, task_number)
+    __import__(module_name)
+    task = sys.modules[module_name]
+    task_class = getattr(task, 'Task%02d' % task_number)
+    return task_class(args)
 
 
 def create_all_tasks(args) -> List[AdventOfCodeProblem]:

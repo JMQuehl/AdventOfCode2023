@@ -1,0 +1,11 @@
+from tests.abstract_test import TaskTest
+import unittest
+from advent_of_code_2023.tasks.taskXX.taskXX import TaskXX
+from advent_of_code_2023.advent_of_code_utils import parse_args
+
+
+class TaskXXTests(TaskTest, unittest.TestCase):
+    task = TaskXX(parse_args([]))
+    known_input = [""]
+    known_output = -1
+    known_bonus_output = -1

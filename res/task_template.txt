@@ -8,16 +8,13 @@ class TaskXX(AdventOfCodeProblem):
         super().__init__(args)
         self.answer_text = '%d.'
         self.bonus_answer_text = '%d.'
-        self.task_number = 0
-
-    def parse_input(self, input_file_content: List[str]):
-        return 0
+        self.task_number = XX
 
     def solve_task(self, input_file_content: List[str]):
-        return 0
+        return -1
 
     def solve_bonus_task(self, input_file_content: List[str]):
-        return 0
+        return -1
 
     def is_input_valid(self, input_file_content: List[str]):
         return all(re.fullmatch("", line) for line in input_file_content)

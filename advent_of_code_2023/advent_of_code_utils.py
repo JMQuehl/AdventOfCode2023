@@ -1,6 +1,6 @@
 import pathlib
 
-from advent_of_code_2023.definitions import TASKS_DIR
+from advent_of_code_2023.definitions import TASKS_DIR, RES_DIR, TEST_DIR
 from advent_of_code_2023.definitions import CURRENT_YEAR
 import os
 from markdown import markdown
@@ -9,6 +9,7 @@ import importlib.util
 from typing import List
 import argparse
 import aocd
+import re
 
 
 def parse_args(arguments: List[str]):
@@ -27,6 +28,18 @@ def input_file_exists(task_number: int) -> bool:
 
 def markdown_file_exists(task_number: int) -> bool:
     return os.path.exists(os.path.join(TASKS_DIR, 'task%02d/task.md' % task_number))
+
+
+def python_file_exists(task_number: int) -> bool:
+    return os.path.exists(os.path.join(TASKS_DIR, 'task%02d/task%02d.py' % (task_number, task_number)))
+
+
+def init_file_exists(task_number: int) -> bool:
+    return os.path.exists(os.path.join(TASKS_DIR, 'task%02d/__init__.py' % task_number))
+
+
+def test_file_exists(task_number: int) -> bool:
+    return os.path.exists(os.path.join(TEST_DIR, 'test_task%02d.py' % task_number))
 
 
 def task_exists(task_number: int) -> bool:
@@ -89,3 +102,38 @@ def render_markdown_file(task_number: int):
             out_f.write(markdown_html)
             out_f.close()
         webbrowser.open(url)
+
+
+def create_task_structure(task_number: int, args):
+    folder = os.path.join(TASKS_DIR, 'task%02d' % task_number)
+    if not os.path.exists(folder):
+        os.mkdir(folder)
+
+    if not input_file_exists(task_number):
+        task_input = download_input_data(task_number)
+        with open(os.path.join(folder, 'input.txt'), 'w') as f:
+            for line in task_input:
+                f.write(line)
+                f.write('\n')
+
+    if not markdown_file_exists(task_number):
+        open(os.path.join(folder, 'task.md'), 'a').close()
+
+    if not python_file_exists(task_number):
+        with open(os.path.join(RES_DIR, 'task_template.txt'), 'r') as f:
+            template = f.read()
+            f.close()
+        template = re.sub('XX', '%02d' % task_number, template)
+        with open(os.path.join(folder, 'task%02d.py' % task_number), 'w') as f:
+            f.write(template)
+
+    if not init_file_exists(task_number):
+        open(os.path.join(folder, '__init__.py'), 'a').close()
+
+    if not test_file_exists(task_number):
+        with open(os.path.join(RES_DIR, 'test_template.txt'), 'r') as f:
+            template = f.read()
+            f.close()
+        template = re.sub('XX', '%02d' % task_number, template)
+        with open(os.path.join(TEST_DIR, 'test_task%02d.py' % task_number), 'w') as f:
+            f.write(template)
