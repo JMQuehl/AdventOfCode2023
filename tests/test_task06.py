@@ -1,7 +1,7 @@
 from tests.abstract_test import TaskTest
 import unittest
-from advent_of_code_template.tasks.task06.task06 import Task06
-from advent_of_code_template.advent_of_code_utils import parse_args
+from advent_of_code_2023.tasks.task06.task06 import Task06
+from advent_of_code_2023.advent_of_code_utils import parse_args
 
 
 class Task06Tests(TaskTest, unittest.TestCase):

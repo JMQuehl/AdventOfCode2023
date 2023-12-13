@@ -1,6 +1,6 @@
 from abc import ABC
 from typing import List
-from advent_of_code_template.AdventOfCodeTemplate import AdventOfCodeProblem
+from advent_of_code_2023.AdventOfCodeTemplate import AdventOfCodeProblem
 
 
 class TaskTest(ABC):
