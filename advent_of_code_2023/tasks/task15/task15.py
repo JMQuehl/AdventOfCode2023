@@ -49,8 +49,8 @@ def process_instruction(instruction: str, lense_map: Dict[int, Deque[Tuple[str, 
 class Task15(AdventOfCodeProblem):
     def __init__(self, args):
         super().__init__(args)
-        self.answer_text = '%d.'
-        self.bonus_answer_text = '%d.'
+        self.answer_text = 'The sum of all hashes is: %d.'
+        self.bonus_answer_text = 'The focusing power of the lens configuration is: %d.'
         self.task_number = 15
 
     def solve_task(self, input_file_content: List[str]):
